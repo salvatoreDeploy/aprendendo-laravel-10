@@ -16,8 +16,15 @@
                 <td>{{ $forum->status}}</td>
                 <td>{{ $forum->content}}</td>
                 <td>
-                    <a href="{{ route('web.show', $forum->id) }}">Ir</a>
-                    <a href="{{ route('web.edit', $forum->id) }}">Editar</a>
+                    <form action="{{ route('web.delete', $forum->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+
+                        <a href="{{ route('web.show', $forum->id) }}">Ir</a>
+                        <a href="{{ route('web.edit', $forum->id) }}">Editar</a>
+
+                        <button type="submit">Excluir</button>
+                    </form>
                 </td>
             </tr>
         @endforeach

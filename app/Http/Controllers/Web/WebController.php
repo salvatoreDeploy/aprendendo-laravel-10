@@ -69,4 +69,17 @@ class WebController extends Controller
 
        return redirect()->route('web.index');
     }
+
+    public function delete(string|int $id, Forum $post)
+    {
+        $post = $post->find($id);
+
+        if(!$post){
+            return "Busca não econtrada";
+        }
+
+        $post->delete();
+
+        return redirect()->route('web.index');
+    }
 }

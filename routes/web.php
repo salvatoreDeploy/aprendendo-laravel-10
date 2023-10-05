@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/forum/post/{id}', [WebController::class, 'show'])->name('web.show');
 Route::put('/forum/post/update/{id}', [WebController::class, 'update'])->name('web.update');
+Route::delete('/forum/post/delete/{id}', [WebController::class, 'delete'])->name('web.delete');
 Route::get('/forum/post/{id}/edit', [WebController::class, 'edit'])->name('web.edit');
 Route::post('/forum', [WebController::class, 'store'])->name('web.store');
 Route::get('/forum/create', [WebController::class, 'create'])->name('web.create');
