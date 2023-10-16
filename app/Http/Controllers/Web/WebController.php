@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateWebForumRequest;
+use App\Http\Requests\UpdateWebForumRequest;
 use App\Models\Forum;
 use Illuminate\Http\Request;
 
@@ -24,9 +26,9 @@ class WebController extends Controller
         return view('web/create');
     }
 
-    public function store(Request $request, Forum $forum)
+    public function store(CreateWebForumRequest $request, Forum $forum)
     {
-       $data = $request->all();
+       $data = $request->validated();
 
        $data['status'] = 'p';
 
@@ -57,7 +59,7 @@ class WebController extends Controller
         return view('web/edit', compact('post'));
     }
 
-    public function update(Request $request, string|int $id, Forum $post)
+    public function update(UpdateWebForumRequest $request, string|int $id, Forum $post)
     {
         $post = $post->find($id);
 

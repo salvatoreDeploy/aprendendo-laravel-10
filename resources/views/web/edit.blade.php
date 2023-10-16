@@ -1,5 +1,13 @@
 <h1>Editar Artigo: {{ $post->id }}</h1>
 
+@if($errors->any())
+    @foreach($errors->all() as $error)
+        <ul>
+            <li>{{ $error }}</li>
+        </ul>
+    @endforeach
+@endif
+
 <form action="{{route('web.update', $post->id)}}" method="post">
     @method('PUT')
     @csrf
