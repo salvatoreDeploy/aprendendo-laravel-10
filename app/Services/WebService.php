@@ -4,15 +4,17 @@ namespace App\Services;
 
 use App\DTOs\CreateWebDTO;
 use App\DTOs\UpdateWebDTO;
+use App\repositories\IWebRepository;
 use stdClass;
 
 class WebService
 {
-    protected $repository;
 
-    public function __construct()
-    {
-    }
+
+    public function __construct(
+        protected IWebRepository $repository
+    )
+    {}
 
     public function getAll(string $filter = null): array
     {
