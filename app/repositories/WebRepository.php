@@ -4,10 +4,16 @@ namespace App\repositories;
 
 use App\DTOs\CreateWebDTO;
 use App\DTOs\UpdateWebDTO;
+use App\Models\Forum;
 use stdClass;
 
 class WebRepository implements IWebRepository
 {
+
+    public function __construct(protected Forum $forum)
+    {
+
+    }
 
     /**
      * @param string $filter
@@ -15,7 +21,12 @@ class WebRepository implements IWebRepository
      */
     public function getAll(string $filter): array
     {
-        // TODO: Implement getAll() method.
+        return $this->forum->where(function ($query) use ($filter){
+            if($filter){
+                $query->where('subject', $filter);
+                $query->orWhere('body', 'like', "%{$filter}%");
+            }
+        })->all()->toArray();
     }
 
     /**
@@ -24,7 +35,13 @@ class WebRepository implements IWebRepository
      */
     public function findOne(string $id): stdClass|null
     {
-        // TODO: Implement findOne() method.
+        $forum = (object) $this->forum->find($id);
+
+        if(!$forum){
+            return null;
+        }
+
+        return (object) $forum->toArray();
     }
 
     /**
@@ -51,6 +68,6 @@ class WebRepository implements IWebRepository
      */
     public function delete(string $id): void
     {
-        // TODO: Implement delete() method.
+        $this->forum->findOrFail($id)->delete();
     }
 }
