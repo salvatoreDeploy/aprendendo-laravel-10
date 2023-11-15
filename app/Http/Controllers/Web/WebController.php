@@ -22,7 +22,7 @@ class WebController extends Controller
 
         $forums = $this->service->getAll($request->filter);
 
-        // dd($forums);
+        //dd($forums);
 
         return view("web/index", compact('forums'));
     }

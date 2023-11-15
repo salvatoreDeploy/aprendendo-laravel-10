@@ -11,7 +11,7 @@ class Forum extends Model
 
     protected $fillable = [
         'subject',
-        'content',
+        'body',
         'status'
     ];
 }

@@ -9,12 +9,5 @@
 @endif
 
 <form action="{{route('web.store')}}" method="post">
-
-    @csrf
-
-    <input type="text" placeholder="Assunto" name="subject" value={{ old('subject') }}>
-    <textarea name="content" cols="30" rows="5" placeholder="Conteudo">{{ old('content') }}</textarea>
-    <button type="submit">
-        Publicar
-    </button>
+    @include('web.components.inputsForm');
 </form>

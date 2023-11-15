@@ -23,7 +23,7 @@ class CreateWebForumRequest extends FormRequest
     {
         return [
             'subject' => 'required|min:5|max:50|unique:forums',
-            'content' => [
+            'body' => [
                 'required',
                 'min:3',
                 'max:255'

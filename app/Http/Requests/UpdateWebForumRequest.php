@@ -30,7 +30,7 @@ class UpdateWebForumRequest extends FormRequest
                 // "unique:forums,subject,{$this->id},id"
                 Rule::unique('forums')->ignore($this->id)
                 ],
-            'content' => [
+            'body' => [
                 'required',
                 'min:3',
                 'max:255'

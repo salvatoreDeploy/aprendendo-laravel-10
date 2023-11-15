@@ -11,22 +11,20 @@ class WebRepository implements IWebRepository
 {
 
     public function __construct(protected Forum $forum)
-    {
-
-    }
+    {}
 
     /**
      * @param string $filter
      * @return array
      */
-    public function getAll(string $filter): array
+    public function getAll(string $filter = null): array
     {
         return $this->forum->where(function ($query) use ($filter){
             if($filter){
                 $query->where('subject', $filter);
                 $query->orWhere('body', 'like', "%{$filter}%");
             }
-        })->all()->toArray();
+        })->get()->toArray();
     }
 
     /**
@@ -50,7 +48,9 @@ class WebRepository implements IWebRepository
      */
     public function create(CreateWebDTO $data): stdClass
     {
-        // TODO: Implement create() method.
+        $forum =  $this->forum->create((array) $data);
+
+        return (object) $forum->toArray();
     }
 
     /**
@@ -59,7 +59,15 @@ class WebRepository implements IWebRepository
      */
     public function update(UpdateWebDTO $data): stdClass|null
     {
-        // TODO: Implement update() method.
+       $forum = $this->forum->find($data->id);
+
+       if(!$forum){
+           return  null;
+       }
+
+       $forum->update((array) $data);
+
+       return (object) $forum->toArray();
     }
 
     /**

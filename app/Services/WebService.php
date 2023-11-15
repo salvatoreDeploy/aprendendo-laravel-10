@@ -33,7 +33,7 @@ class WebService
 
     public function update(UpdateWebDTO $data): stdClass|null
     {
-        return $this->repository->create($data);
+        return $this->repository->update($data);
     }
 
     public function delete(string $id): void

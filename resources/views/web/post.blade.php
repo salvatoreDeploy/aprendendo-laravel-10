@@ -3,5 +3,5 @@
 <ul>
     <li>Assunto: {{ $post->subject }}</li>
     <li>Status: {{ $post->status }}</li>
-    <li>Descrição: {{ $post->content }}</li>
+    <li>Descrição: {{ $post->body }}</li>
 </ul>
