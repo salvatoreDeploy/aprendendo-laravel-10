@@ -10,18 +10,18 @@
     <th></th>
     </thead>
     <tbody>
-    @foreach ($forums as $forum)
+    @foreach ($forums->itemsData() as $forum)
         <tr>
-            <td>{{ $forum['subject']}}</td>
-            <td>{{ $forum['status']}}</td>
-            <td>{{ $forum['body']}}</td>
+            <td>{{ $forum->subject }}</td>
+            <td>{{ $forum->status }}</td>
+            <td>{{ $forum->body }}</td>
             <td>
-                <form action="{{ route('web.delete', $forum['id']) }}" method="post">
+                <form action="{{ route('web.delete', $forum->id) }}" method="post">
                     @csrf
                     @method('DELETE')
 
-                    <a href="{{ route('web.show', $forum['id']) }}">Ir</a>
-                    <a href="{{ route('web.edit', $forum['id']) }}">Editar</a>
+                    <a href="{{ route('web.show', $forum->id) }}">Ir</a>
+                    <a href="{{ route('web.edit', $forum->id) }}">Editar</a>
 
                     <button type="submit">Excluir</button>
                 </form>

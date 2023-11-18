@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\repositories\IWebRepository;
-use App\repositories\WebRepository;
+use App\Repositories\IWebRepository;
+use App\Repositories\WebRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

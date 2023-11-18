@@ -1,10 +1,11 @@
 <?php
 
-namespace App\repositories;
+namespace App\Repositories;
 
 use App\DTOs\CreateWebDTO;
 use App\DTOs\UpdateWebDTO;
 use App\Models\Forum;
+use App\Presenters\PaginationPresenter;
 use stdClass;
 
 class WebRepository implements IWebRepository
@@ -77,5 +78,24 @@ class WebRepository implements IWebRepository
     public function delete(string $id): void
     {
         $this->forum->findOrFail($id)->delete();
+    }
+
+    /**
+     * @param int $page
+     * @param string|null $filter
+     * @param int $totalPerPage
+     * @return IPagination
+     */
+    public function paginate(int $page = 1, string $filter = null, int $totalPerPage = 15): IPagination
+    {
+        $result =  $this->forum->where(function ($query) use ($filter){
+            if($filter){
+                $query->where('subject', $filter);
+                $query->orWhere('body', 'like', "%{$filter}%");
+            }
+        })->paginate($totalPerPage, ['*'], 'page', $page);
+
+       // dd((new PaginationPresenter($result))->itemsData());
+       return new PaginationPresenter($result);
     }
 }

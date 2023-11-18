@@ -1,6 +1,6 @@
 <?php
 
-namespace App\repositories;
+namespace App\Repositories;
 
 use App\DTOs\CreateWebDTO;
 use App\DTOs\UpdateWebDTO;
@@ -17,4 +17,6 @@ interface IWebRepository
     public function update(UpdateWebDTO $data): stdClass|null;
 
     public function delete(string $id): void;
+
+    public function paginate(int $page = 1, string $filter = null, int $totalPerPage = 15): IPagination;
 }

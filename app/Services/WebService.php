@@ -4,7 +4,8 @@ namespace App\Services;
 
 use App\DTOs\CreateWebDTO;
 use App\DTOs\UpdateWebDTO;
-use App\repositories\IWebRepository;
+use App\Repositories\IPagination;
+use App\Repositories\IWebRepository;
 use stdClass;
 
 class WebService
@@ -39,5 +40,10 @@ class WebService
     public function delete(string $id): void
     {
         $this->repository->delete($id);
+    }
+
+    public function paginate(int $page = 1, string $filter = null, int $totalPerPage = 15): IPagination
+    {
+        return $this->repository->paginate(page: $page, filter: $filter, totalPerPage: $totalPerPage);
     }
 }

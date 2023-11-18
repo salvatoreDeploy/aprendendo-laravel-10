@@ -20,9 +20,18 @@ class WebController extends Controller
     public function index(Request $request)
     {
 
-        $forums = $this->service->getAll($request->filter);
+        $forums = $this->service->paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter
+        );
 
-        //dd($forums);
+        /*
+        $forums = Forum::paginate();
+        {{ $forums->links(); }}
+        */
+
+        // dd($forums->itemsData());
 
         return view("web/index", compact('forums'));
     }
