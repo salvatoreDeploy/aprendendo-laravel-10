@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\ForumStatus;
 use App\Http\Controllers\Web\WebController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/testenum', function (){
+    dd(array_column(ForumStatus::cases(), 'name'));
+});
 
 Route::get('/forum/post/{id}', [WebController::class, 'show'])->name('web.show');
 Route::put('/forum/post/update/{id}', [WebController::class, 'update'])->name('web.update');

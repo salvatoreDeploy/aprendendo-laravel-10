@@ -22,7 +22,7 @@ class WebController extends Controller
 
         $forums = $this->service->paginate(
             page: $request->get('page', 1),
-            totalPerPage: $request->get('per_page', 15),
+            totalPerPage: $request->get('per_page', 1),
             filter: $request->filter
         );
 
@@ -33,7 +33,9 @@ class WebController extends Controller
 
         // dd($forums->itemsData());
 
-        return view("web/index", compact('forums'));
+        $filter = ['filter' => $request->get('filter', '')];
+
+        return view("web/index", compact('forums', 'filter'));
     }
 
     public function create()
