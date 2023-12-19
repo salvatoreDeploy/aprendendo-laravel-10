@@ -13,7 +13,7 @@
         @foreach ($forums->itemsData() as $forum)
             <tr>
                 <td>{{ $forum->subject }}</td>
-                <td>{{ getStatusForum($forum->status) }}</td>
+                <td>{{ getStatusForum("A") }}</td>
                 <td>{{ $forum->body }}</td>
                 <td>
                     <form action="{{ route('web.delete', $forum->id) }}" method="post">

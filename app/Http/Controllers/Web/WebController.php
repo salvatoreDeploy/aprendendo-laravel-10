@@ -22,8 +22,8 @@ class WebController extends Controller
 
         $forums = $this->service->paginate(
             page: $request->get('page', 1),
-            totalPerPage: $request->get('per_page', 1),
-            filter: $request->filter
+            filter: $request->filter,
+            totalPerPage: $request->get('per_page', 1)
         );
 
         /*
