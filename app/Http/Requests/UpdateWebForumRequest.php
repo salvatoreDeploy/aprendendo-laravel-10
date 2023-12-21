@@ -22,13 +22,15 @@ class UpdateWebForumRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->forum;
+
         return [
             'subject' => [
                 'required',
                 'min:5',
                 'max:50',
                 // "unique:forums,subject,{$this->id},id"
-                Rule::unique('forums')->ignore($this->id)
+                Rule::unique('forums')->ignore($id)
                 ],
             'body' => [
                 'required',

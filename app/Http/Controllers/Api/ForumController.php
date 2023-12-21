@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\DTOs\CreateWebDTO;
+use App\DTOs\UpdateWebDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateWebForumRequest;
+use App\Http\Requests\UpdateWebForumRequest;
 use App\Http\Resources\ForumsResource;
 use App\Services\WebService;
 use Illuminate\Http\Request;
@@ -52,9 +54,16 @@ class ForumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateWebForumRequest $request, string $id)
     {
-        //
+
+        if (!$forum = $this->service->update(UpdateWebDTO::makeFromRequest($request, $id))) {
+            return response()->json([
+                'error' => 'Not Found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        return new ForumsResource($forum);
     }
 
     /**

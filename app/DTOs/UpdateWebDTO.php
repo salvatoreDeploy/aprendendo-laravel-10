@@ -12,6 +12,6 @@ class UpdateWebDTO
 
     public static function makeFromRequest(UpdateWebForumRequest $request, string $id = null): self
     {
-        return new self($request->id, $request->subject, ForumStatus::A, $request->body);
+        return new self($id ?? $request->id, $request->subject, ForumStatus::A, $request->body);
     }
 }
