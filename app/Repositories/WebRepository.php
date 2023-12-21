@@ -34,7 +34,7 @@ class WebRepository implements IWebRepository
      */
     public function findOne(string $id): stdClass|null
     {
-        $forum = (object) $this->forum->find($id);
+        $forum = $this->forum->find($id);
 
         if(!$forum){
             return null;

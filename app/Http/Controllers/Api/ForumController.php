@@ -8,6 +8,8 @@ use App\Http\Requests\CreateWebForumRequest;
 use App\Http\Resources\ForumsResource;
 use App\Services\WebService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 class ForumController extends Controller
 {
@@ -37,7 +39,14 @@ class ForumController extends Controller
      */
     public function show(string $id)
     {
-        //
+        if (!$forum = $this->service->findOne($id)) {
+            return response()->json([
+                'error' => 'Not Found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+
+        return new ForumsResource($forum);
     }
 
     /**
@@ -53,6 +62,14 @@ class ForumController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if (!$this->service->findOne($id)) {
+            return response()->json([
+                'error' => 'Not Found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $this->service->delete($id);
+
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }
