@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Adapters\ApiAdapters;
 use App\DTOs\CreateWebDTO;
 use App\DTOs\UpdateWebDTO;
 use App\Http\Controllers\Controller;
@@ -32,16 +33,7 @@ class ForumController extends Controller
             totalPerPage: $request->get('per_page', 5)
         );
 
-        return ForumsResource::collection($forums->itemsData())->additional([
-            "meta" => [
-                "total" => $forums->total(),
-                "isFirstPage" => $forums->isFirstPage(),
-                "isLastPage" => $forums->isLastPage(),
-                "currentPage" => $forums->currentPage(),
-                "nextPage" => $forums->getNumberNextPage(),
-                "previousPage" => $forums->getNumberPreviousPage()
-            ]
-        ]);
+       return ApiAdapters::toJson($forums);
     }
 
     /**
