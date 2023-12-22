@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateWebForumRequest;
 use App\Http\Requests\UpdateWebForumRequest;
 use App\Http\Resources\ForumsResource;
+use App\Models\Forum;
 use App\Services\WebService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -21,9 +22,26 @@ class ForumController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // $forums = Forum::paginate();
+
+        $forums = $this->service->paginate(
+            page: $request->get('page', 1),
+            filter: $request->filter,
+            totalPerPage: $request->get('per_page', 5)
+        );
+
+        return ForumsResource::collection($forums->itemsData())->additional([
+            "meta" => [
+                "total" => $forums->total(),
+                "isFirstPage" => $forums->isFirstPage(),
+                "isLastPage" => $forums->isLastPage(),
+                "currentPage" => $forums->currentPage(),
+                "nextPage" => $forums->getNumberNextPage(),
+                "previousPage" => $forums->getNumberPreviousPage()
+            ]
+        ]);
     }
 
     /**
