@@ -1,3 +1,5 @@
+@extends('web.layouts.web')
+
 @csrf
 
 <input type="text" placeholder="Assunto" name="subject" value="{{ $post->subject ?? old('subject') }}">

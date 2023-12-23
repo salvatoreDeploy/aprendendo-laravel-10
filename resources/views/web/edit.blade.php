@@ -1,3 +1,5 @@
+@extends('web.layouts.web')
+
 <h1>Editar Artigo: {{ $post->id }}</h1>
 
 <x-alert />
@@ -7,5 +9,5 @@
 
     @include('web.components.inputsForm', [
         "post" => $post
-]);
+])
 </form>
