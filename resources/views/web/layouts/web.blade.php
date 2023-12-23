@@ -8,13 +8,14 @@
     <title>@yield('title') - {{ config('app.name') }}</title>
 </head>
 <body>
-    <header id="default">
-        @yield('header')
-    </header>
+<section class="container px-4 mx-auto">
+
+    @yield('header')
 
     <div class="content">
         @yield('content')
     </div>
+</section>
 </body>
 <script src="https://cdn.tailwindcss.com"></script>
 </html>
