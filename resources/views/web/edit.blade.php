@@ -1,6 +1,12 @@
 @extends('web.layouts.web')
 
-<h1>Editar Artigo: {{ $post->id }}</h1>
+@section('title', 'Editar Post')
+
+@section('header')
+    <h1 class="text-lg text-black-500">Editar Artigo: {{ $post->id }}</h1>
+@endsection
+
+@section('content')
 
 <x-alert />
 
@@ -11,3 +17,5 @@
         "post" => $post
 ])
 </form>
+
+@endsection

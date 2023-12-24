@@ -1,14 +1,15 @@
+@extends('web.layouts.web')
 
-<h1>Novo Artigo:</h1>
+@section('title', 'Criar novo post')
 
-@if($errors->any)
-    @foreach($errors->all() as $error)
-        <ul>
-            <li>{{ $error }}</li>
-        </ul>
-    @endforeach
-@endif
+@section('header')
+    <h1 class="text-lg text-black-500">Novo Artigo:</h1>
+@endsection
 
-<form action="{{route('web.store')}}" method="post">
-    @include('web.components.inputsForm')
-</form>
+@section('content')
+
+    <form action="{{route('web.store')}}" method="post">
+        @include('web.components.inputsForm')
+    </form>
+
+@endsection

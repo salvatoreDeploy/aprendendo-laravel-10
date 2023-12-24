@@ -12,7 +12,8 @@
 
     @yield('header')
 
-    <div class="content">
+    <div>
+        <x-messages />
         @yield('content')
     </div>
 </section>

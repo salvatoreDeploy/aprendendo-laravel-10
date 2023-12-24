@@ -53,7 +53,7 @@ class WebController extends Controller
 
        $this->service->create(CreateWebDTO::makeFromRequest($request));
 
-       return redirect()->route('web.index');
+       return redirect()->route('web.index')->with('message', 'Post criado com suacesso');
     }
 
     public function show(string $id)
@@ -97,7 +97,7 @@ class WebController extends Controller
 
         $this->service->update(UpdateWebDTO::makeFromRequest($request));
 
-       return redirect()->route('web.index');
+       return redirect()->route('web.index')->with('message', 'Post editado com suacesso');
     }
 
     public function delete(string|int $id, Forum $post)
@@ -114,6 +114,6 @@ class WebController extends Controller
 
         $this->service->delete($id);
 
-        return redirect()->route('web.index');
+        return redirect()->route('web.index')->with('message', 'Post deletado com sucesso');
     }
 }
